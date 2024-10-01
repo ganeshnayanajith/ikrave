@@ -1,0 +1,41 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "IKRAVE - Food Delivery Service API",
+    "description": "This is the IKRAVE - Food Delivery Service API.",
+    "version": "1.0.0"
+  },
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/swagger.json": {
+      "get": {
+        "tags": [
+          "Swagger API Documentation JSON"
+        ],
+        "summary": "Returns the JSON file of API documentation.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

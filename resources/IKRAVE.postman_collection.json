@@ -1,0 +1,1725 @@
+{
+	"info": {
+		"_postman_id": "7beadac1-3cee-44a7-a54f-6b8982be3a44",
+		"name": "IKRAVE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24347292"
+	},
+	"item": [
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "login for admin [public]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"postman.setEnvironmentVariable(\"admin_access_token\", responseJson.data.access_token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"password\",\r\n    \"device_token\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_host}}/admin/login",
+							"host": [
+								"{{base_url_host}}"
+							],
+							"path": [
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cart",
+			"item": [
+				{
+					"name": "add_cart_item - by user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"postman.setEnvironmentVariable(\"cart_id\", responseJson.data._id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"merchant_id\": \"{{merchant_id}}\",\r\n    \"food_id\":\"{{food_item_id}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/cart",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove_cart_item - by user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"postman.setEnvironmentVariable(\"cart_id\", responseJson.data._id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"merchant_id\": \"{{merchant_id}}\",\r\n    \"food_id\":\"{{food_item_id}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/cart",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_cart_items - by user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cart",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clear_cart - by user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cart/clear",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cart",
+								"clear"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "driver",
+			"item": [
+				{
+					"name": "add_driver - by admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"postman.setEnvironmentVariable(\"driver_id\", responseJson.data._id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "full_name",
+									"value": "driver1",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "driver1",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "driver1@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "+94771234567",
+									"type": "text"
+								},
+								{
+									"key": "licence",
+									"value": "564263",
+									"type": "text"
+								},
+								{
+									"key": "vehicle_reg",
+									"value": "GIV-4568",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/ganes/Downloads/download.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/driver",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"driver"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login for driver- public",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"postman.setEnvironmentVariable(\"driver_access_token\", responseJson.data.access_token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"driver1\",\r\n    \"password\": \"password\",\r\n    \"device_token\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/driver/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"driver",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assign_driver",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"65ee71f5931b3cdfd0dece5f\",\r\n    \"order_id\": \"65ef2e6c8044d04f60c2280e\",\r\n    \"driver_id\": \"65ee72f7931b3cdfd0dece66\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/driver/assign",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"driver",
+								"assign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_driver_profile - by driver",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{driver_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"is_available\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/driver/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"driver",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "food",
+			"item": [
+				{
+					"name": "add_food_item - by merchant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"postman.setEnvironmentVariable(\"food_item_id\", responseJson.data._id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{merchant_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "item_name",
+									"value": "Mutton and Sea Food Fried Rice 2",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "is_available",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "allergens",
+									"value": "Tomato,Onion",
+									"type": "text"
+								},
+								{
+									"key": "food_image",
+									"type": "file",
+									"src": "/C:/Users/ganes/Downloads/download.png"
+								},
+								{
+									"key": "cuisine_type",
+									"value": "INDIAN",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/food",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"food"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_food_items by merchant id - by user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{merchant_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/food/merchant/{{merchant_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"food",
+								"merchant",
+								"{{merchant_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_food_items by merchant id - by merchant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{merchant_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/food/merchant/{{merchant_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"food",
+								"merchant",
+								"{{merchant_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_food_item - by merchant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{merchant_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"is_available\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/food/{{food_item_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"food",
+								"{{food_item_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_food_item - by merchant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"postman.setEnvironmentVariable(\"access_token\", responseJson.data.access_token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{merchant_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/food/661808363db5ad9311d90bdd",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"food",
+								"661808363db5ad9311d90bdd"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "food_recommendation_engine",
+			"item": [
+				{
+					"name": "get_recommendations_by_food_name - by user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"food_name\": \"Juicy Burger\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/food_recommendation_engine/by_food",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"food_recommendation_engine",
+								"by_food"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_recommendations_by_cuisine_type - by user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cuisine_type\": \"INDIAN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/food_recommendation_engine/by_cuisine",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"food_recommendation_engine",
+								"by_cuisine"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_recommendations_for_user - by user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/food_recommendation_engine/65fd7c842313ff1fc0000001",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"food_recommendation_engine",
+								"65fd7c842313ff1fc0000001"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "merchant",
+			"item": [
+				{
+					"name": "add_merchant - by admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"postman.setEnvironmentVariable(\"merchant_id\", responseJson.data.merchant._id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"request_id\": \"{{merchant_request_id}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/merchant",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"merchant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login for merchant - public",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"postman.setEnvironmentVariable(\"merchant_access_token\", responseJson.data.access_token);\r",
+									"postman.setEnvironmentVariable(\"merchant_id\", responseJson.data.merchant._id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"merchant1\",\r\n    \"password\": \"password\",\r\n    \"device_token\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_host}}/merchant/login",
+							"host": [
+								"{{base_url_host}}"
+							],
+							"path": [
+								"merchant",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_merchants - by user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/merchant",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"merchant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_nearby_merchants - by user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"latitude\": 51.5073,\n    \"longitude\": -0.1277\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/merchant/nearby",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"merchant",
+								"nearby"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_merchant - by merchant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{merchant_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"is_available\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/merchant",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"merchant"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "merchant_order",
+			"item": [
+				{
+					"name": "get_merchant_orders - by merchant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{merchant_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_host}}/merchant_order?status=PENDING",
+							"host": [
+								"{{base_url_host}}"
+							],
+							"path": [
+								"merchant_order"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "PENDING"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_merchant_order - by merchant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{merchant_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/merchant_order/662cf9396220da62799203fb",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"merchant_order",
+								"662cf9396220da62799203fb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_merchant_order - by merchant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{merchant_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"ACCEPTED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/merchant_order/{{order_id}}/{{merchant_order_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"merchant_order",
+								"{{order_id}}",
+								"{{merchant_order_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "merchant_request",
+			"item": [
+				{
+					"name": "create_merchant_request - public",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"postman.setEnvironmentVariable(\"merchant_request_id\", responseJson.data._id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "merchant11",
+									"type": "text"
+								},
+								{
+									"key": "business_name",
+									"value": "merchant11",
+									"type": "text"
+								},
+								{
+									"key": "business_registration",
+									"value": "merchant11",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "+94773612311",
+									"type": "text"
+								},
+								{
+									"key": "food_hygiene_rating",
+									"value": "4.5",
+									"type": "text"
+								},
+								{
+									"key": "business_address",
+									"value": "London",
+									"type": "text"
+								},
+								{
+									"key": "opening_hours",
+									"value": "08:00",
+									"type": "text"
+								},
+								{
+									"key": "closing_hours",
+									"value": "08:00",
+									"type": "text"
+								},
+								{
+									"key": "geo_location",
+									"value": "London",
+									"type": "text"
+								},
+								{
+									"key": "latitude",
+									"value": "20.65",
+									"type": "text"
+								},
+								{
+									"key": "longitude",
+									"value": "20.65",
+									"type": "text"
+								},
+								{
+									"key": "shop_image",
+									"type": "file",
+									"src": "/C:/Users/ganes/Downloads/download.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/merchant_request",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"merchant_request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_merchant_requests - by admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/merchant_request",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"merchant_request"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order",
+			"item": [
+				{
+					"name": "create_order - by user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"postman.setEnvironmentVariable(\"order_id\", responseJson.data.order._id);\r",
+									"postman.setEnvironmentVariable(\"merchant_order_id\", responseJson.data.merchant_orders[0]._id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"delivery_address\": \"London\",\r\n    \"payment_method\": \"CASH_ON_DELIVERY\",\r\n    \"latitude\": 20.65,\r\n    \"longitude\": 20.65\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_order -  by user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/order/{{order_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order",
+								"{{order_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_orders_by_user_id_and_type - by user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"uuid": "1bde3f3d-f986-481e-8e9d-067d0696bf09"
+							}
+						],
+						"url": {
+							"raw": "{{base_url_host}}/order?status=COMPLETED",
+							"host": [
+								"{{base_url_host}}"
+							],
+							"path": [
+								"order"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "COMPLETED"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_orders_by_user_id_and_type -  by driver",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/order?status=COMPLETED,REJECTED",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "COMPLETED,REJECTED"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "complete_order -  by driver",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{driver_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/order/{{order_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order",
+								"{{order_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pre_set_question",
+			"item": [
+				{
+					"name": "get_pre_set_questions - public",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/pre_set_question",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pre_set_question"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "email_register for user - public",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"postman.setEnvironmentVariable(\"access_token\", responseJson.data.access_token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\": \"user5111\",\r\n    \"username\": \"user5111\",\r\n    \"phone_number\": \"+947712345616\",\r\n    \"email\": \"eshanfernando7@gmail.com\",\r\n    \"password\": \"password\",\r\n    \"address\": \"London\",\r\n    \"device_token\": \"\",\r\n    \"preferences\": [\r\n        {\r\n            \"question\": \"What are your most favourite beverages and dishes?\",\r\n            \"answer\": [\r\n                \"Fish Rice and Curry\"\r\n            ]\r\n        },\r\n        {\r\n            \"question\": \"What are your most favourite beverages and dishes?\",\r\n            \"answer\": [\r\n                \"Fish Rice and Curry\"\r\n            ]\r\n        },\r\n        {\r\n            \"question\": \"What are your most favourite beverages and dishes?\",\r\n            \"answer\": [\r\n                \"Fish Rice and Curry\"\r\n            ]\r\n        },\r\n        {\r\n            \"question\": \"What are your most favourite beverages and dishes?\",\r\n            \"answer\": [\r\n                \"Fish Rice and Curry\"\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_host}}/user/email_register",
+							"host": [
+								"{{base_url_host}}"
+							],
+							"path": [
+								"user",
+								"email_register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify_email - by user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"postman.setEnvironmentVariable(\"access_token\", responseJson.data.access_token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"verification_code\": 901436\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/verify_email",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"verify_email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resend_verify_email - by user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"postman.setEnvironmentVariable(\"access_token\", responseJson.data.access_token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/resend_verify_email",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"resend_verify_email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login for user - public",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"postman.setEnvironmentVariable(\"user_access_token\", responseJson.data.access_token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user1\",\r\n    \"password\": \"password\",\r\n    \"device_token\": \"token\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user profile - by user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_profile - by user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"London UK\",\r\n    \"preferences\": [\r\n        {\r\n            \"question\": \"What are your most favourite beverages and dishes?\",\r\n            \"answer\": [\r\n                \"Shushi\"\r\n            ]\r\n        },\r\n        {\r\n            \"question\": \"What types of cuisine do you most prefer?\",\r\n            \"answer\": [\r\n                \"INDIAN\"\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Swagger",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/swagger.json",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"swagger.json"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
